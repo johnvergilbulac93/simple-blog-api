@@ -9,6 +9,7 @@ const routes = require("../routes/api");
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use('/images', express.static('images'))
 app.use("/api/blog", routes);
 
 app.listen(process.env.APP_PORT, () => {
