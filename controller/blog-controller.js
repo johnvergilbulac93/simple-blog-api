@@ -62,6 +62,7 @@ module.exports = {
       id: req.body.id,
       title: req.body.title,
       description: req.body.description,
+      image: `images/${req.file.filename}`,
     };
     update(body, (err, results) => {
       if (err) {
@@ -77,7 +78,7 @@ module.exports = {
     });
   },
   deleteBlog: (req, res) => {
-    remove(req.body, (err, results) => {
+    remove(req.params.id, (err, results) => {
       if (err) {
         console.log(err);
         return res.status(500).json({

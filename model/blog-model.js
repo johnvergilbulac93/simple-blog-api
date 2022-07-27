@@ -51,8 +51,8 @@ module.exports = {
   },
   update: (data, callback) => {
     conn.query(
-      "update blogs set title = ?, description = ? where id = ?",
-      [data.title, data.description, data.id],
+      "update blogs set title = ?, description = ?, image = ? where id = ?",
+      [data.title, data.description, data.image , data.id],
       (error, results, fields) => {
         if (error) {
           return callback(error);
@@ -61,10 +61,10 @@ module.exports = {
       }
     );
   },
-  remove: (data, callback) => {
+  remove: (id, callback) => {
     conn.query(
       "Delete from blogs where id = ?",
-      [data.id],
+      [id],
       (error, results, fields) => {
         if (error) {
           return callback(error);
