@@ -17,7 +17,6 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-
 router.get("/", blog);
 router.post("/create", upload.single("blogImage"), createBlog);
 router.get("/:id/edit", blogById);

@@ -7,6 +7,7 @@ const cors = require("cors");
 
 const routes = require("../routes/api");
 
+app.use("/images", express.static("images"));
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/api/blog", routes);
