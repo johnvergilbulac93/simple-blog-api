@@ -4,7 +4,7 @@ const {
   showById,
   update,
   remove,
-  search,
+  updateImage,
 } = require("../model/blog-model");
 
 module.exports = {
@@ -62,7 +62,6 @@ module.exports = {
       id: req.body.id,
       title: req.body.title,
       description: req.body.description,
-      image: `images/${req.file.filename}`,
     };
     update(body, (err, results) => {
       if (err) {
@@ -87,6 +86,24 @@ module.exports = {
       }
       return res.json({
         message: "Record has been deleted.",
+      });
+    });
+  },
+  changeImage: async (req, res) => {
+    const body = {
+      id: req.params.id,
+      image: `images/${req.file.filename}`,
+    };
+    updateImage(body, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          message: "Server error",
+        });
+      }
+      return res.status(200).json({
+        message: "Successfully updated.",
+        data: results,
       });
     });
   },

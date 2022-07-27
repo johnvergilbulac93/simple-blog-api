@@ -51,8 +51,20 @@ module.exports = {
   },
   update: (data, callback) => {
     conn.query(
-      "update blogs set title = ?, description = ?, image = ? where id = ?",
-      [data.title, data.description, data.image , data.id],
+      "update blogs set title = ?, description = ? where id = ?",
+      [data.title, data.description, data.id],
+      (error, results, fields) => {
+        if (error) {
+          return callback(error);
+        }
+        return callback(null, results[0]);
+      }
+    );
+  },
+  updateImage: (data, callback) => {
+    conn.query(
+      "update blogs set image = ? where id = ?",
+      [data.image, data.id],
       (error, results, fields) => {
         if (error) {
           return callback(error);
